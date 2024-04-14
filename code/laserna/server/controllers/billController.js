@@ -28,3 +28,21 @@ exports.getAllBills = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+exports.updateBillPaidStatus = async (req, res) => {
+    try {
+        const { billId } = req.params;
+        const { paid } = req.body;
+
+        const updatedBill = await Bill.findByIdAndUpdate(billId, { paid }, { new: true });
+
+        if (!updatedBill) {
+            return res.status(404).json({ message: 'Bill not found' });
+        }
+
+        res.status(200).json({ message: 'Bill paid status updated successfully', bill: updatedBill });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};

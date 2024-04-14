@@ -18,9 +18,13 @@ mongoose.connect('mongodb://localhost:27017/laserna', { useNewUrlParser: true, u
 const userController = require('./controllers/userController');
 app.post('/signup', userController.signup);
 
-//define create bill
+// Define create bill route
 const billController = require('./controllers/billController');
-app.post('/create-bill', billController.createBill); // Ensure the route is defined correctly
+app.post('/create-bill', billController.createBill);
+
+// Define route to update bill paid status
+app.patch('/bills/:billId', billController.updateBillPaidStatus);
+
 // Define bill routes
 const billRoutes = require('./routes/billRoutes'); // Import billRoutes
 app.use('/bills', billRoutes); // Mount billRoutes at /bills path
