@@ -17,7 +17,7 @@ const BillForm = () => {
         e.preventDefault();
         try {
             console.log('Form Data:', formData);
-            const response = await fetch('/bills', {
+            const response = await fetch('/create-bill', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import SignupForm from './components/SignupForm';
 import BillForm from './components/BillForm';
 import LoginForm from './components/LoginForm';
-import UserDetails from './components/UserDetails'; // Import UserDetails component
+import UserDetails from './components/UserDetails';
+import BillList from './components/BillList'; // Import BillList component
 
 function HomeButton() {
   return (
@@ -26,8 +27,13 @@ function HomeButton() {
           </Link>
         </li>
         <li>
-          <Link to="/user-details"> {/* Add link to UserDetails */}
+          <Link to="/user-details">
             <button className="nav-btn">User Details</button>
+          </Link>
+        </li>
+        <li>
+          <Link to="/bills">
+            <button className="nav-btn">View Bills</button>
           </Link>
         </li>
       </ul>
@@ -45,7 +51,8 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/create-bill" element={<BillForm />} />
-          <Route path="/user-details" element={<UserDetails />} /> {/* Add route for UserDetails */}
+          <Route path="/user-details" element={<UserDetails />} />
+          <Route path="/bills" element={<BillList />} /> 
         </Routes>
       </div>
     </Router>

@@ -42,7 +42,7 @@ const UserDetails = () => {
                     <p>First Name: {user.firstName}</p>
                     <p>Last Name: {user.lastName}</p>
                     <p>Email: {user.email}</p>
-                    {user.userType === 'tenant' && (
+                    {user.userType === 'manager' && (
                         <Link to="/create-bill">
                             <button>Create Bill</button>
                         </Link>

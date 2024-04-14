@@ -2,6 +2,7 @@
 
 const Bill = require('../models/Bill');
 
+// Controller function to create a new bill
 exports.createBill = async (req, res) => {
     try {
         console.log('Request Payload:', req.body); // Log the request payload
@@ -13,5 +14,17 @@ exports.createBill = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server error' });
+    }
+};
+
+
+// Controller function to get all bills
+exports.getAllBills = async (req, res) => {
+    try {
+        const bills = await Bill.find();
+        res.json(bills);
+    } catch (error) {
+        console.error('Error fetching bills:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 };
