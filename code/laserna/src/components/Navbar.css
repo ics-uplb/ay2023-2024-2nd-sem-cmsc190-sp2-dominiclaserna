@@ -1,0 +1,25 @@
+.navbar {
+    background-color: #333; /* Set background color */
+    position: fixed; /* Fix the navbar position */
+    width: 100%; /* Set the width to full */
+    top: 0; /* Place the navbar at the top */
+  }
+  
+  .nav-links {
+    list-style-type: none; /* Remove default list styles */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Display links in a row */
+    justify-content: flex-start; /* Align links to the left */
+  }
+  
+  .nav-links li {
+    margin-right: 20px; /* Add margin between links */
+  }
+  
+  .nav-link {
+    color: #fff; /* Set link color */
+    text-decoration: none; /* Remove underline */
+    padding: 1rem; /* Add padding */
+  }
+  

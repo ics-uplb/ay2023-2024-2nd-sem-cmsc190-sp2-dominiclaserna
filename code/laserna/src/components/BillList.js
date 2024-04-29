@@ -18,7 +18,7 @@ const BillList = () => {
             if (response.ok) {
                 const data = await response.json();
                 const unpaidBills = data.filter((bill) => {
-                    return (bill.receiver === loggedInUserEmail || bill.biller === loggedInUserEmail) && !bill.paid;
+                    return (bill.receiver === loggedInUserEmail || bill.biller === loggedInUserEmail);
                 });
                 setBills(unpaidBills);
                 // Set the selected bill ID to the first bill in the list

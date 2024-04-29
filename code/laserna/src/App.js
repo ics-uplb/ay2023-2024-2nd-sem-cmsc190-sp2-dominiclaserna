@@ -1,58 +1,25 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import SignupForm from './components/SignupForm';
 import BillForm from './components/BillForm';
 import LoginForm from './components/LoginForm';
 import UserDetails from './components/UserDetails';
-import BillList from './components/BillList'; // Import BillList component
-
-function HomeButton() {
-  return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">
-            <button className="nav-btn">Home</button>
-          </Link>
-        </li>
-        <li>
-          <Link to="/signup">
-            <button className="nav-btn">Sign Up</button>
-          </Link>
-        </li>
-        <li>
-          <Link to="/login">
-            <button className="nav-btn">Login</button>
-          </Link>
-        </li>
-        <li>
-          <Link to="/user-details">
-            <button className="nav-btn">User Details</button>
-          </Link>
-        </li>
-        <li>
-          <Link to="/bills">
-            <button className="nav-btn">View Bills</button>
-          </Link>
-        </li>
-      </ul>
-    </nav>
-  );
-}
+import BillList from './components/BillList';
+import Navbar from './components/Navbar'; // Import Navbar component
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <HomeButton />
+        <Navbar /> {/* Include the Navbar component */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/create-bill" element={<BillForm />} />
           <Route path="/user-details" element={<UserDetails />} />
-          <Route path="/bills" element={<BillList />} /> 
+          <Route path="/bills" element={<BillList />} />
         </Routes>
       </div>
     </Router>
