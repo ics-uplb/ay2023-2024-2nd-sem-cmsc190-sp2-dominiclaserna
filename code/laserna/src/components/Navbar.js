@@ -1,8 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css'; // Import CSS file for Navbar styling
+import { Link, useNavigate } from 'react-router-dom';
+import './Navbar.css';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('loggedInUserEmail');
+    navigate('/login'); // Redirect to login page
+  };
+
   return (
     <nav className="navbar">
       <ul className="nav-links">
@@ -20,6 +27,12 @@ const Navbar = () => {
         </li>
         <li>
           <Link to="/bills" className="nav-link">View Bills</Link>
+        </li>
+        <li>
+          <Link to="/messages" className="nav-link">Messages</Link>
+        </li>
+        <li>
+          <button className="nav-link logout-button" onClick={handleLogout}>Logout</button>
         </li>
       </ul>
     </nav>

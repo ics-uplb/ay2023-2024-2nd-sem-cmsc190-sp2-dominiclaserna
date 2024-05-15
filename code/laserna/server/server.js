@@ -1,5 +1,3 @@
-// laserna/server/server.js
-
 // Import necessary modules
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -36,6 +34,10 @@ app.post('/login', authController.login);
 // Define user details route
 const userDetailsRoutes = require('./routes/userRoutes');
 app.use('/user-details', userDetailsRoutes);
+
+// Define message routes
+const messageRoutes = require('./routes/messageRoutes');
+app.use('/messages', messageRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;
