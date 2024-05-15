@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'; // Import toast
+import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 import './Navbar.css';
 
 const Navbar = () => {
@@ -7,7 +9,20 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('loggedInUserEmail');
+    notify(); // Call the notify function
     navigate('/login'); // Redirect to login page
+  };
+
+  const notify = () => {
+    toast.success('You have been logged out.', { // Show success toast
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   return (

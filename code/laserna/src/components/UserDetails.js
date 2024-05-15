@@ -1,6 +1,6 @@
-// src/components/UserDetails.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './UserDetails.css'; // Import UserDetails stylesheet
 
 const UserDetails = () => {
     const [user, setUser] = useState(null);
@@ -33,15 +33,15 @@ const UserDetails = () => {
     }, []);
 
     return (
-        <div>
+        <div className="user-details-container">
             <h2>User Details</h2>
             {loading && <p>Loading...</p>}
-            {error && <p>{error}</p>}
+            {error && <p className="error-message">{error}</p>}
             {user && (
-                <div>
-                    <p>First Name: {user.firstName}</p>
-                    <p>Last Name: {user.lastName}</p>
-                    <p>Email: {user.email}</p>
+                <div className="user-details">
+                    <p><strong>First Name:</strong> {user.firstName}</p>
+                    <p><strong>Last Name:</strong> {user.lastName}</p>
+                    <p><strong>Email:</strong> {user.email}</p>
                     {user.userType === 'manager' && (
                         <Link to="/create-bill">
                             <button>Create Bill</button>

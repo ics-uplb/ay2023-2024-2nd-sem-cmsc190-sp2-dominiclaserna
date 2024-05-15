@@ -1,25 +1,43 @@
+.login-container {
+  text-align: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-image: url("https://img.freepik.com/free-photo/studio-background-concept-abstract-empty-light-gradient-purple-studio-room-background-product_1258-54682.jpg?size=338&ext=jpg&ga=GA1.1.1224184972.1712102400&semt=ais");
-    background-size: cover;
-    background-position: center;
-    height: 100vh; /* Ensure the background covers the whole viewport height */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .login-form {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .login-container {
-    width: 100%;
-    max-width: 400px;
-  }
+.login-container h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+.login-container h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #fff; /* Font color */
+}
+
+.login-form {
+  background-image: url('bg2.jpg');
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-form input,
+.login-form button {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-form button {
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: #0056b3;
+}

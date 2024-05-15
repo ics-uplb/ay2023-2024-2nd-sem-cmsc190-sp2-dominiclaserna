@@ -1,10 +1,11 @@
 
+
 .App {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-
+  background-image: url('./bg.jpg'); /* Change the background image */
   background-size: cover;
   background-position: center;
 }
@@ -29,6 +30,20 @@
   flex-direction: column;
   align-items: center;
 }
+/* App.css */
+
+.bg {
+  background-image: url('./bg.jpg');
+}
+
+.bg2 {
+  background-image: url('./bg2.jpg');
+}
+
+.bg3 {
+  background-image: url('./bg3.jpg');
+}
+
 
 .signup-container input,
 .signup-container button {

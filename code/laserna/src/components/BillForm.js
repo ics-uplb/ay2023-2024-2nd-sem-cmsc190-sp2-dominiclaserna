@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify'; // Import toast
+import './BillForm.css';
 
 const BillForm = () => {
     const [formData, setFormData] = useState({
@@ -6,7 +8,7 @@ const BillForm = () => {
         amount: '',
         receiver: '',
         biller: '',
-        paymentRefNumber: '' // Keep the paymentRefNumber field in the state
+        paymentRefNumber: ''
     });
 
     const handleChange = (e) => {
@@ -16,7 +18,6 @@ const BillForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log('Form Data:', formData);
             const response = await fetch('/create-bill', {
                 method: 'POST',
                 headers: {
@@ -25,9 +26,9 @@ const BillForm = () => {
                 body: JSON.stringify(formData)
             });
             if (response.ok) {
-                console.log('Bill created successfully');
+                toast.success('Bill created successfully!'); // Display success notification
             } else {
-                console.error('Failed to create bill');
+                toast.error('Failed to create bill!'); // Display error notification
             }
         } catch (error) {
             console.error('Server error:', error);
@@ -35,14 +36,17 @@ const BillForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="date" name="dueDate" value={formData.dueDate} onChange={handleChange} />
-            <input type="number" name="amount" placeholder="Amount" value={formData.amount} onChange={handleChange} />
-            <input type="text" name="receiver" placeholder="Receiver" value={formData.receiver} onChange={handleChange} />
-            <input type="text" name="biller" placeholder="Biller" value={formData.biller} onChange={handleChange} />
-            <input type="text" name="paymentRefNumber" placeholder="Payment Reference Number" value={formData.paymentRefNumber} onChange={handleChange} /> {/* Keep paymentRefNumber field */}
-            <button type="submit">Create Bill</button>
-        </form>
+        <div className="bill-form-container">
+            <h2>Create Bill</h2>
+            <form onSubmit={handleSubmit} className="bill-form">
+                <input type="date" name="dueDate" value={formData.dueDate} onChange={handleChange} placeholder="Due Date" />
+                <input type="number" name="amount" value={formData.amount} onChange={handleChange} placeholder="Amount" />
+                <input type="text" name="receiver" value={formData.receiver} onChange={handleChange} placeholder="Receiver" />
+                <input type="text" name="biller" value={formData.biller} onChange={handleChange} placeholder="Biller" />
+                <input type="text" name="paymentRefNumber" value={formData.paymentRefNumber} onChange={handleChange} placeholder="Payment Reference Number" />
+                <button type="submit">Create Bill</button>
+            </form>
+        </div>
     );
 };
 

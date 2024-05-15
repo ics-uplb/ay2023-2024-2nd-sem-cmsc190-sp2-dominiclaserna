@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify'; // Import toast
+import './MessageForm.css';
 
 const MessageForm = ({ onMessageSubmit }) => {
   const [receiver, setReceiver] = useState('');
@@ -12,6 +14,7 @@ const MessageForm = ({ onMessageSubmit }) => {
     setReceiver('');
     setSubject('');
     setBody('');
+    toast.success('Message sent successfully!'); // Display success notification
   };
 
   return (

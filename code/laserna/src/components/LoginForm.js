@@ -1,7 +1,6 @@
-// laserna/src/components/LoginForm.js
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import './LoginForm.css';
 
 const LoginForm = () => {
@@ -26,19 +25,17 @@ const LoginForm = () => {
                 },
                 body: JSON.stringify(formData)
             });
-            const data = await response.json(); // Parse response data
+            const data = await response.json();
             if (response.ok) {
-                console.log('Login successful');
-                // Store user's email in local storage
+                toast.success('Login successful!'); // Display success notification
                 localStorage.setItem('loggedInUserEmail', formData.email);
-                // Redirect based on user type
                 if (data.user && data.user.userType === 'user') {
                     navigate('/create-bill');
                 } else {
-                    navigate('/user-details'); // Redirect to user details page
+                    navigate('/user-details');
                 }
             } else {
-                console.error('Login failed');
+                toast.error('Incorrect email or password!'); // Display error notification
             }
         } catch (error) {
             console.error('Server error:', error);

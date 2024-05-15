@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS
 import SignupForm from './components/SignupForm';
 import BillForm from './components/BillForm';
 import LoginForm from './components/LoginForm';
@@ -10,11 +12,16 @@ import MessageList from './components/MessageList';
 import Navbar from './components/Navbar';
 
 function App() {
+  const handleLogout = () => {
+    localStorage.removeItem('loggedInUserEmail');
+    toast.success('Logged out successfully!'); // Display success notification
+  };
+
   return (
-    
     <Router>
-           <div className="App">
-        <Navbar />
+      <div className="App" style={{ color: '#fff' }}> {/* Set color for all text elements */}
+        <ToastContainer /> {/* Container for displaying notifications */}
+        <Navbar handleLogout={handleLogout} />
         <div className="content" style={{ paddingTop: '4rem' }}>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -33,62 +40,22 @@ function App() {
 
 function Home() {
   return (
-    <div className="home-container" >
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <h1>Welcome to the Laserna Real Estate Management App</h1>
-      <p>Your all-in-one solution for managing your real estate!</p>
-      
-      <div className="features">
-        <div className="feature">
-          <h2>Signup</h2>
-          <p>Create a new account to get started.</p>
-          <Link to="/signup">
-            <button className="feature-btn">Sign Up</button>
-          </Link>
-        </div>
-        <div className="feature">
-          <h2>Login</h2>
-          <p>Access your account and manage your activities.</p>
-          <Link to="/login">
-            <button className="feature-btn">Login</button>
-          </Link>
-        </div>
-        <div className="feature">
-          <h2>Create Bill</h2>
-          <p>Generate new bills and manage payments efficiently.</p>
-          <Link to="/create-bill">
-            <button className="feature-btn">Create Bill</button>
-          </Link>
-        </div>
-        <div className="feature">
-          <h2>User Details</h2>
-          <p>View and update your user details.</p>
-          <Link to="/user-details">
-            <button className="feature-btn">User Details</button>
-          </Link>
-        </div>
-        <div className="feature">
-          <h2>View Bills</h2>
-          <p>Check your bill statuses and payment references.</p>
-          <Link to="/bills">
-            <button className="feature-btn">View Bills</button>
-          </Link>
-        </div>
+    <div className="home-container" style={{ textAlign: 'center', marginTop: '2rem' }}>
+      <h1 style={{ fontSize: '3rem', fontFamily: 'Arial, sans-serif', marginBottom: '1rem' }}>Welcome to the Laserna Real Estate Management App</h1>
+      <h2 style={{ marginBottom: '2rem' }}>Your all-in-one solution for managing your real estate!</h2>
+      <div style={{ marginBottom: '2rem' }}>
+        <Link to="/login" style={{ display: 'inline-block', fontSize: '1.2rem', padding: '0.5rem 1rem', marginBottom: '0.5rem', color: '#fff', backgroundColor: '#007bff', textDecoration: 'none', fontWeight: 'bold', borderRadius: '5px', border: 'none', cursor: 'pointer' }}>Login</Link>
+        <br />
+        <span style={{ fontSize: '1rem', color: '#fff' }}>Not a member yet? <br /><Link to="/signup" style={{ color: '#007bff', textDecoration: 'none', fontWeight: 'bold', marginLeft: '0.5rem' }}>Signup</Link></span>
       </div>
     </div>
   );
 }
+
 function SignupPage() {
   return (
     <>
-      <h1>Sign Up Page</h1>
+      <h1 style={{ color: '#fff' }}>Sign Up Page</h1>
       <SignupForm />
     </>
   );
@@ -97,7 +64,7 @@ function SignupPage() {
 function LoginPage() {
   return (
     <>
-      <h1>Login Page</h1>
+      <h1 style={{ color: '#fff' }}>Login Page</h1>
       <LoginForm />
     </>
   );

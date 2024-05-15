@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import './BillList.css'; // Import BillList stylesheet
 
 const BillList = () => {
     const [bills, setBills] = useState([]);
     const [userType, setUserType] = useState('');
-    const [selectedBillId, setSelectedBillId] = useState(null); // For tracking the selected bill
-    const [paymentRefNumber1, setPaymentRefNumber] = useState(''); // For storing the payment reference number
+    const [selectedBillId, setSelectedBillId] = useState(null);
+    const [paymentRefNumber, setPaymentRefNumber] = useState('');
     const loggedInUserEmail = localStorage.getItem('loggedInUserEmail');
 
     useEffect(() => {
@@ -21,7 +22,6 @@ const BillList = () => {
                     return (bill.receiver === loggedInUserEmail || bill.biller === loggedInUserEmail);
                 });
                 setBills(unpaidBills);
-                // Set the selected bill ID to the first bill in the list
                 if (unpaidBills.length > 0) {
                     setSelectedBillId(unpaidBills[0]._id);
                 }
@@ -59,7 +59,6 @@ const BillList = () => {
     
             if (response.ok) {
                 console.log('Bill marked as paid successfully');
-                // Refresh the bill list after marking the bill as paid
                 fetchBills();
             } else {
                 console.error('Failed to mark bill as paid');
@@ -70,21 +69,19 @@ const BillList = () => {
     };
 
     const handlePayBill = async () => {
-        console.log('Payment Reference Number:', paymentRefNumber1);
+        console.log('Payment Reference Number:', paymentRefNumber);
         try {
             const response = await fetch(`/bills/${selectedBillId}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ paymentRefNumber: paymentRefNumber1 }) // Send paymentRefNumber in the request body
+                body: JSON.stringify({ paymentRefNumber: paymentRefNumber })
             });
     
             if (response.ok) {
                 console.log('Bill payment updated successfully');
-                // Refresh the bill list after updating payment information to fetch the updated paymentRefNumber
                 fetchBills();
-                // Reset the selected bill ID
                 setPaymentRefNumber('');
             } else {
                 console.error('Failed to update bill payment');
@@ -96,33 +93,30 @@ const BillList = () => {
     
     const renderActionButton = (billId, paymentRefNumber, isPaid) => {
         if (!isPaid && userType === 'manager') {
-            // Render "Mark as Paid" button for unpaid bills and if user type is manager
             return (
                 <button onClick={() => handleMarkAsPaid(billId)}>Mark as Paid</button>
             );
         } else if (userType === 'tenant' && selectedBillId === billId) {
-            // Render input field and submit button if the bill is selected
             return (
                 <>
-                    <input type="text" value={paymentRefNumber1} onChange={(e) => setPaymentRefNumber(e.target.value)} />
+                    <input type="text" value={paymentRefNumber} onChange={(e) => setPaymentRefNumber(e.target.value)} />
                     <button onClick={handlePayBill}>Submit Payment</button>
                 </>
             );
         } else if (userType === 'tenant') {
-            // Render "Pay Bill" button if the bill is not selected
             return (
                 <button onClick={() => setSelectedBillId(billId)}>Pay Bill</button>
             );
         } else {
-            return null; // Render nothing if user type is unknown or if the bill is paid
+            return null;
         }
     };
     
     
     return (
-        <div>
+        <div className="bill-list-container">
             <h2>Unpaid Bill List</h2>
-            <table>
+            <table className="bill-table">
                 <thead>
                     <tr>
                         <th>Amount</th>
@@ -150,7 +144,6 @@ const BillList = () => {
             </table>
         </div>
     );
-    
 };
 
 export default BillList;

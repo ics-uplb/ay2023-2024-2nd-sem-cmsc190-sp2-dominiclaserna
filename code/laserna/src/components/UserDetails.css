@@ -1,0 +1,14 @@
+.user-details-container {
+    padding: 20px;
+    background-color: #5a1070;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-details {
+    margin-top: 20px;
+}
+
+.error-message {
+    color: red;
+}

@@ -14,12 +14,12 @@
   }
   
   .message-left {
-    background-color: #f1f1f1;
+    background-color: #64066d;
     text-align: left;
   }
   
   .message-right {
-    background-color: #e1f7d5;
+    background-color: #64066d;
     text-align: right;
     align-self: flex-end;
   }
