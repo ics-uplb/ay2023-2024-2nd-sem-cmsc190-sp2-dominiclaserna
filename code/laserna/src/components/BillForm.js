@@ -8,7 +8,8 @@ const BillForm = () => {
         amount: '',
         receiver: '',
         biller: '',
-        paymentRefNumber: ''
+        paymentRefNumber: '',
+        category: '' // Include category in the initial state
     });
 
     const handleChange = (e) => {
@@ -44,6 +45,7 @@ const BillForm = () => {
                 <input type="text" name="receiver" value={formData.receiver} onChange={handleChange} placeholder="Receiver" />
                 <input type="text" name="biller" value={formData.biller} onChange={handleChange} placeholder="Biller" />
                 <input type="text" name="paymentRefNumber" value={formData.paymentRefNumber} onChange={handleChange} placeholder="Payment Reference Number" />
+                <input type="text" name="category" value={formData.category} onChange={handleChange} placeholder="Category and month" /> {/* Add category input field */}
                 <button type="submit">Create Bill</button>
             </form>
         </div>

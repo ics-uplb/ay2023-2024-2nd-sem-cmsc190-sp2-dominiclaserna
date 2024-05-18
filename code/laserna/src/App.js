@@ -10,7 +10,8 @@ import UserDetails from './components/UserDetails';
 import BillList from './components/BillList';
 import MessageList from './components/MessageList';
 import Navbar from './components/Navbar';
-
+import AnnouncementsForm from './components/AnnouncementsForm'; // Import the AnnouncementsForm component
+import AnnouncementsList from './components/AnnouncementLists.js';
 function App() {
   const handleLogout = () => {
     localStorage.removeItem('loggedInUserEmail');
@@ -31,6 +32,7 @@ function App() {
             <Route path="/user-details" element={<UserDetails />} />
             <Route path="/bills" element={<BillList />} />
             <Route path="/messages" element={<MessageList />} />
+            <Route path="/announcements" element={<AnnouncementsList />} />
           </Routes>
         </div>
       </div>
@@ -69,5 +71,7 @@ function LoginPage() {
     </>
   );
 }
+
+
 
 export default App;

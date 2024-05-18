@@ -6,8 +6,8 @@ const Bill = require('../models/Bill');
 exports.createBill = async (req, res) => {
     try {
         console.log('Request Payload:', req.body); // Log the request payload
-        const { dueDate, amount, receiver, biller,paymentRefNumber } = req.body;
-        const bill = new Bill({ dueDate, amount, receiver, biller, paymentRefNumber });
+        const { dueDate, amount, receiver, biller, paymentRefNumber, category } = req.body;
+        const bill = new Bill({ dueDate, amount, receiver, biller, paymentRefNumber, category });
         console.log('Bill before saving:', bill); // Log the bill object before saving
         await bill.save();
         res.status(201).json({ message: 'Bill created successfully', bill });
@@ -29,10 +29,7 @@ exports.getAllBills = async (req, res) => {
     }
 };
 
-// laserna/server/controllers/billController.js
-
-
-
+// Controller function to update bill paid status and payment reference number
 exports.updateBillPaidStatus = async (req, res) => {
     const { billId } = req.params;
     const { paid, paymentRefNumber } = req.body; // Ensure paymentRefNumber is correctly extracted from the request body

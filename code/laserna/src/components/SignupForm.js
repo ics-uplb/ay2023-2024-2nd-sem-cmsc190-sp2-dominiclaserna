@@ -8,7 +8,8 @@ const SignupForm = () => {
         lastName: '',
         email: '',
         userType: 'tenant',
-        password: ''
+        password: '',
+        manager: '' // Include manager field in the initial state
     });
 
     const handleChange = (e) => {
@@ -45,8 +46,13 @@ const SignupForm = () => {
                 <option value="tenant">Tenant</option>
                 <option value="manager">Manager</option>
             </select>
+            {/* Render manager input field only if userType is tenant */}
+            {formData.userType === 'tenant' && (
+                <input type="text" name="manager" placeholder="Manager" value={formData.manager} onChange={handleChange} />
+            )}
             <button type="submit">Sign Up</button>
         </form>
     );
 };
+
 export default SignupForm;

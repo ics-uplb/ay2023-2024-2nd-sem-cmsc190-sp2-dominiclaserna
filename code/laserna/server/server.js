@@ -39,6 +39,9 @@ app.use('/user-details', userDetailsRoutes);
 const messageRoutes = require('./routes/messageRoutes');
 app.use('/messages', messageRoutes);
 
+const announcementRoutes = require('./routes/announcementRoutes'); // Import announcementRoutes
+app.use('/announcements', announcementRoutes); // Mount announcementRoutes at /announcements path
+
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

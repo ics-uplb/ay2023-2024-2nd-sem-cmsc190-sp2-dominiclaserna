@@ -1,5 +1,3 @@
-// laserna/server/models/User.js
-
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
@@ -24,6 +22,12 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true // Make password a required field
+    },
+    manager: {
+        type: String,
+        required: function() {
+            return this.userType === 'tenant'; // Manager field is required only for tenant users
+        }
     }
 });
 

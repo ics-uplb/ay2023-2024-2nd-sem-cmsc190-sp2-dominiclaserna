@@ -49,6 +49,9 @@ const Navbar = () => {
         <li>
           <button className="nav-link logout-button" onClick={handleLogout}>Logout</button>
         </li>
+        <li>
+          <Link to="/announcements" className="nav-link">Announcements</Link> {/* Corrected route */}
+        </li>
       </ul>
     </nav>
   );

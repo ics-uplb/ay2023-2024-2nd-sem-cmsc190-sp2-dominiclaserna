@@ -1,5 +1,3 @@
-// laserna/server/models/Bill.js
-
 const mongoose = require('mongoose');
 
 const billSchema = new mongoose.Schema({
@@ -7,8 +5,9 @@ const billSchema = new mongoose.Schema({
     amount: { type: Number, required: true },
     receiver: { type: String, required: true },
     biller: { type: String, required: true },
-    paid: { type: Boolean, default: false }, // Add a 'paid' field
-    paymentRefNumber: { type: String, default: null } // Add a 'paymentRefNumber' field
+    paid: { type: Boolean, default: false },
+    paymentRefNumber: { type: String, default: null },
+    category: { type: String, required: true } // Add a 'category' field as a flexible string
 });
 
 const Bill = mongoose.model('Bill', billSchema);

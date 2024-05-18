@@ -4,9 +4,9 @@ import './BillList.css'; // Import BillList stylesheet
 const BillList = () => {
     const [bills, setBills] = useState([]);
     const [userType, setUserType] = useState('');
+    const loggedInUserEmail = localStorage.getItem('loggedInUserEmail');
     const [selectedBillId, setSelectedBillId] = useState(null);
     const [paymentRefNumber, setPaymentRefNumber] = useState('');
-    const loggedInUserEmail = localStorage.getItem('loggedInUserEmail');
 
     useEffect(() => {
         fetchBills();
@@ -18,13 +18,7 @@ const BillList = () => {
             const response = await fetch('/bills');
             if (response.ok) {
                 const data = await response.json();
-                const unpaidBills = data.filter((bill) => {
-                    return (bill.receiver === loggedInUserEmail || bill.biller === loggedInUserEmail);
-                });
-                setBills(unpaidBills);
-                if (unpaidBills.length > 0) {
-                    setSelectedBillId(unpaidBills[0]._id);
-                }
+                setBills(data);
             } else {
                 console.error('Failed to fetch bills');
             }
@@ -46,6 +40,18 @@ const BillList = () => {
             console.error('Error fetching user type:', error);
         }
     };
+
+    const currentDate = new Date(); // Get the current date
+
+    const unpaidOverdueBills = bills.filter((bill) => {
+        return !bill.paid && new Date(bill.dueDate) < currentDate;
+    });
+
+    const upcomingUnpaidBills = bills.filter((bill) => {
+        return !bill.paid && new Date(bill.dueDate) >= currentDate;
+    });
+
+    const paidBills = bills.filter((bill) => bill.paid);
 
     const handleMarkAsPaid = async (billId) => {
         try {
@@ -90,54 +96,91 @@ const BillList = () => {
             console.error('Error updating bill payment:', error);
         }
     };
-    
-    const renderActionButton = (billId, paymentRefNumber, isPaid) => {
-        if (!isPaid && userType === 'manager') {
-            return (
-                <button onClick={() => handleMarkAsPaid(billId)}>Mark as Paid</button>
-            );
-        } else if (userType === 'tenant' && selectedBillId === billId) {
-            return (
-                <>
-                    <input type="text" value={paymentRefNumber} onChange={(e) => setPaymentRefNumber(e.target.value)} />
-                    <button onClick={handlePayBill}>Submit Payment</button>
-                </>
-            );
-        } else if (userType === 'tenant') {
-            return (
-                <button onClick={() => setSelectedBillId(billId)}>Pay Bill</button>
-            );
-        } else {
-            return null;
-        }
-    };
-    
-    
+
     return (
         <div className="bill-list-container">
-            <h2>Unpaid Bill List</h2>
+            <h2>Unpaid and Overdue Bills</h2>
             <table className="bill-table">
                 <thead>
                     <tr>
+                        <th>Category</th>
                         <th>Amount</th>
                         <th>Due Date</th>
                         <th>Receiver</th>
                         <th>Biller</th>
                         <th>Payment Ref Number</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        {userType === 'manager' && <th>Action</th>}
                     </tr>
                 </thead>
                 <tbody>
-                    {bills.map((bill) => (
+                    {unpaidOverdueBills.map((bill) => (
                         <tr key={bill._id}>
+                            <td>{bill.category}</td>
                             <td>{bill.amount}</td>
                             <td>{bill.dueDate}</td>
                             <td>{bill.receiver}</td>
                             <td>{bill.biller}</td>
                             <td>{bill.paymentRefNumber}</td>
-                            <td>{bill.paid ? "Paid" : "Unpaid"}</td>
-                            <td>{renderActionButton(bill._id, bill.paymentRefNumber, bill.paid)}</td>
+                            {userType === 'manager' && <td><button onClick={() => handleMarkAsPaid(bill._id)}>Mark as Paid</button></td>}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
+            <h2>Upcoming Unpaid Bills</h2>
+            <table className="bill-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Due Date</th>
+                        <th>Receiver</th>
+                        <th>Biller</th>
+                        <th>Payment Ref Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {upcomingUnpaidBills.map((bill) => (
+                        <tr key={bill._id}>
+                            <td>{bill.category}</td>
+                            <td>{bill.amount}</td>
+                            <td>{bill.dueDate}</td>
+                            <td>{bill.receiver}</td>
+                            <td>{bill.biller}</td>
+                            <td>
+                                <input 
+                                    type="text" 
+                                    value={paymentRefNumber} 
+                                    onChange={(e) => setPaymentRefNumber(e.target.value)} 
+                                />
+                                <button onClick={handlePayBill}>Submit Payment</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
+            <h2>Paid Bills</h2>
+            <table className="bill-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Due Date</th>
+                        <th>Receiver</th>
+                        <th>Biller</th>
+                        <th>Payment Ref Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {paidBills.map((bill) => (
+                        <tr key={bill._id}>
+                            <td>{bill.category}</td>
+                            <td>{bill.amount}</td>
+                            <td>{bill.dueDate}</td>
+                            <td>{bill.receiver}</td>
+                            <td>{bill.biller}</td>
+                            <td>{bill.paymentRefNumber}</td>
                         </tr>
                     ))}
                 </tbody>
