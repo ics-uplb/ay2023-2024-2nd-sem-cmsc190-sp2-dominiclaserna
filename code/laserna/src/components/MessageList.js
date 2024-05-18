@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import MessageForm from './MessageForm'; 
 import './MessageList.css';
 
-
 const MessageList = () => {
   const [messages, setMessages] = useState([]);
   const loggedInUserEmail = localStorage.getItem('loggedInUserEmail');
@@ -47,7 +46,6 @@ const MessageList = () => {
 
   return (
     <div className="message-list-container">
-      <MessageForm onMessageSubmit={handleMessageSubmit} />
       <div className="message-list">
         {messages.map((message) => (
           <div
@@ -60,6 +58,9 @@ const MessageList = () => {
             <p><em>To: {message.receiver}</em></p>
           </div>
         ))}
+      </div>
+      <div className="message-form-container">
+        <MessageForm onMessageSubmit={handleMessageSubmit} />
       </div>
     </div>
   );

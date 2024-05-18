@@ -1,6 +1,7 @@
 // laserna/server/controllers/billController.js
 
 const Bill = require('../models/Bill');
+const Notification = require('../models/Notification'); // Import the Notification model
 
 // Controller function to create a new bill
 exports.createBill = async (req, res) => {
@@ -10,6 +11,15 @@ exports.createBill = async (req, res) => {
         const bill = new Bill({ dueDate, amount, receiver, biller, paymentRefNumber, category });
         console.log('Bill before saving:', bill); // Log the bill object before saving
         await bill.save();
+
+        // Create a notification for the new bill
+        const newNotification = await Notification.create({
+            notificationOwner: receiver, // Assuming the receiver is the one who should see the notification
+            about: 'unpaid/overdue bill',
+            seen: false // Initially set as unseen
+        });
+        console.log('Notification created:', newNotification); // Log the newly created notification
+
         res.status(201).json({ message: 'Bill created successfully', bill });
     } catch (error) {
         console.error(error);

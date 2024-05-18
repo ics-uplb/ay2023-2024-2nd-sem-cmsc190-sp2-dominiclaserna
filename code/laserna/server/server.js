@@ -41,6 +41,9 @@ app.use('/messages', messageRoutes);
 
 const announcementRoutes = require('./routes/announcementRoutes'); // Import announcementRoutes
 app.use('/announcements', announcementRoutes); // Mount announcementRoutes at /announcements path
+// Define notification routes
+const notificationRoutes = require('./routes/notificationRoutes');
+app.use('/notifications', notificationRoutes); // Mount notificationRoutes at /notifications path
 
 // Start the server
 const PORT = process.env.PORT || 3000;

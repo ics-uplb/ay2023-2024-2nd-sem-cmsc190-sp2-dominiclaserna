@@ -1,11 +1,21 @@
+/* MessageList.css */
+
 .message-list-container {
-    padding: 1rem;
-  }
-  
-  .message-list {
-    margin-top: 1rem;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  margin-top: 240px;
+  height: 100%; /* Ensure the container takes up the full height */
+}
+
+.message-list {
+  flex: 1; /* Allow the message list to grow and occupy remaining space */
+  overflow-y: auto; /* Add vertical scrollbar when content overflows */
+}
+
+.message-form-container {
+  margin-top: 20px; /* Add margin to separate form from message list */
+}
+
   .message {
     border: 1px solid #ccc;
     padding: 1rem;

@@ -29,9 +29,12 @@ const LoginForm = () => {
             if (response.ok) {
                 toast.success('Login successful!'); // Display success notification
                 localStorage.setItem('loggedInUserEmail', formData.email);
+                
                 if (data.user && data.user.userType === 'user') {
+                    window.location.reload();
                     navigate('/create-bill');
                 } else {
+                    window.location.reload();
                     navigate('/user-details');
                 }
             } else {

@@ -12,7 +12,11 @@ import MessageList from './components/MessageList';
 import Navbar from './components/Navbar';
 import AnnouncementsForm from './components/AnnouncementsForm'; // Import the AnnouncementsForm component
 import AnnouncementsList from './components/AnnouncementLists.js';
+import NotificationBell from './components/NotificationBell'; // Import the NotificationBell component
+
 function App() {
+  const loggedInUserEmail = localStorage.getItem('loggedInUserEmail');
+
   const handleLogout = () => {
     localStorage.removeItem('loggedInUserEmail');
     toast.success('Logged out successfully!'); // Display success notification
@@ -43,7 +47,7 @@ function App() {
 function Home() {
   return (
     <div className="home-container" style={{ textAlign: 'center', marginTop: '2rem' }}>
-      <h1 style={{ fontSize: '3rem', fontFamily: 'Arial, sans-serif', marginBottom: '1rem' }}>Welcome to the Laserna Real Estate Management App</h1>
+      <h1 style={{ fontSize: '3rem', fontFamily: 'Arial, sans-serif', marginBottom: '1rem' }}>Welcome to the Real Estate Management App</h1>
       <h2 style={{ marginBottom: '2rem' }}>Your all-in-one solution for managing your real estate!</h2>
       <div style={{ marginBottom: '2rem' }}>
         <Link to="/login" style={{ display: 'inline-block', fontSize: '1.2rem', padding: '0.5rem 1rem', marginBottom: '0.5rem', color: '#fff', backgroundColor: '#007bff', textDecoration: 'none', fontWeight: 'bold', borderRadius: '5px', border: 'none', cursor: 'pointer' }}>Login</Link>

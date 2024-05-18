@@ -40,3 +40,33 @@
   cursor: pointer;
   padding: 1rem;
 }
+.notification-bell {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  margin-top: 17px;
+}
+
+.bell-icon {
+  color: #fff; /* Set bell icon color */
+  font-size: 1.5rem; /* Set bell icon size */
+  position: relative; /* Position the bell icon */
+  top: 3px; /* Adjust vertical position */
+}
+
+.notification-badge {
+  background-color: red;
+  border-radius: 50%;
+  color: white;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  position: absolute;
+  right: -8px;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}

@@ -18,7 +18,7 @@ const MessageForm = ({ onMessageSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="message-form" onSubmit={handleSubmit}>
       <input
         type="email"
         placeholder="Receiver's Email"
