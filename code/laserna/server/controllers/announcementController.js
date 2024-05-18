@@ -20,10 +20,8 @@ exports.createAnnouncement = async (req, res) => {
 // Get announcements for a tenant
 exports.getAnnouncementsForTenant = async (req, res) => {
   try {
-    const email = req.params.email;
-    const announcements = await Announcement.find({ manager:email });
+    const announcements = await Announcement.find();
     res.status(200).json(announcements);
-    await Announcement.find({manager: email});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });

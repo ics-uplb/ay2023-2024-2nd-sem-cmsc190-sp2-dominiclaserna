@@ -5,8 +5,7 @@ const BillList = () => {
     const [bills, setBills] = useState([]);
     const [userType, setUserType] = useState('');
     const loggedInUserEmail = localStorage.getItem('loggedInUserEmail');
-    const [selectedBillId, setSelectedBillId] = useState(null);
-    const [paymentRefNumber, setPaymentRefNumber] = useState('');
+    const [paymentRefNumbers, setPaymentRefNumbers] = useState({});
 
     useEffect(() => {
         fetchBills();
@@ -74,10 +73,11 @@ const BillList = () => {
         }
     };
 
-    const handlePayBill = async () => {
+    const handlePayBill = async (billId) => {
+        const paymentRefNumber = paymentRefNumbers[billId];
         console.log('Payment Reference Number:', paymentRefNumber);
         try {
-            const response = await fetch(`/bills/${selectedBillId}`, {
+            const response = await fetch(`/bills/${billId}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -88,13 +88,17 @@ const BillList = () => {
             if (response.ok) {
                 console.log('Bill payment updated successfully');
                 fetchBills();
-                setPaymentRefNumber('');
+                setPaymentRefNumbers((prev) => ({ ...prev, [billId]: '' }));
             } else {
                 console.error('Failed to update bill payment');
             }
         } catch (error) {
             console.error('Error updating bill payment:', error);
         }
+    };
+
+    const handlePaymentRefNumberChange = (billId, value) => {
+        setPaymentRefNumbers((prev) => ({ ...prev, [billId]: value }));
     };
 
     return (
@@ -120,7 +124,14 @@ const BillList = () => {
                             <td>{bill.dueDate}</td>
                             <td>{bill.receiver}</td>
                             <td>{bill.biller}</td>
-                            <td>{bill.paymentRefNumber}</td>
+                            <td>
+                                <input
+                                    type="text"
+                                    value={paymentRefNumbers[bill._id] || ''}
+                                    onChange={(e) => handlePaymentRefNumberChange(bill._id, e.target.value)}
+                                />
+                                <button onClick={() => handlePayBill(bill._id)}>Submit Payment</button>
+                            </td>
                             {userType === 'manager' && <td><button onClick={() => handleMarkAsPaid(bill._id)}>Mark as Paid</button></td>}
                         </tr>
                     ))}
@@ -148,12 +159,12 @@ const BillList = () => {
                             <td>{bill.receiver}</td>
                             <td>{bill.biller}</td>
                             <td>
-                                <input 
-                                    type="text" 
-                                    value={paymentRefNumber} 
-                                    onChange={(e) => setPaymentRefNumber(e.target.value)} 
+                                <input
+                                    type="text"
+                                    value={paymentRefNumbers[bill._id] || ''}
+                                    onChange={(e) => handlePaymentRefNumberChange(bill._id, e.target.value)}
                                 />
-                                <button onClick={handlePayBill}>Submit Payment</button>
+                                <button onClick={() => handlePayBill(bill._id)}>Submit Payment</button>
                             </td>
                         </tr>
                     ))}
