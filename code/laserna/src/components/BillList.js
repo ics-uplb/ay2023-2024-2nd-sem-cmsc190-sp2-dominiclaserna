@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './BillList.css'; // Import BillList stylesheet
 
 const BillList = () => {
@@ -101,8 +102,38 @@ const BillList = () => {
         setPaymentRefNumbers((prev) => ({ ...prev, [billId]: value }));
     };
 
+    const renderBillRow = (bill) => (
+        <tr key={bill._id}>
+            <td>{bill.category}</td>
+            <td>{bill.amount}</td>
+            <td>{bill.dueDate}</td>
+            <td>{bill.receiver}</td>
+            <td>{bill.biller}</td>
+            <td>
+                {userType === 'manager' ? (
+                    bill.paymentRefNumber || 'N/A'
+                ) : (
+                    <>
+                        <input
+                            type="text"
+                            value={paymentRefNumbers[bill._id] || ''}
+                            onChange={(e) => handlePaymentRefNumberChange(bill._id, e.target.value)}
+                        />
+                        <button onClick={() => handlePayBill(bill._id)}>Submit Payment</button>
+                    </>
+                )}
+            </td>
+            {userType === 'manager' && <td><button onClick={() => handleMarkAsPaid(bill._id)}>Mark as Paid</button></td>}
+        </tr>
+    );
+
     return (
         <div className="bill-list-container">
+                        {userType === 'manager' && (
+                <Link to="/create-bill" className="create-bill-button">
+                    Create Bill
+                </Link>
+            )}
             <h2>Unpaid and Overdue Bills</h2>
             <table className="bill-table">
                 <thead>
@@ -117,24 +148,7 @@ const BillList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {unpaidOverdueBills.map((bill) => (
-                        <tr key={bill._id}>
-                            <td>{bill.category}</td>
-                            <td>{bill.amount}</td>
-                            <td>{bill.dueDate}</td>
-                            <td>{bill.receiver}</td>
-                            <td>{bill.biller}</td>
-                            <td>
-                                <input
-                                    type="text"
-                                    value={paymentRefNumbers[bill._id] || ''}
-                                    onChange={(e) => handlePaymentRefNumberChange(bill._id, e.target.value)}
-                                />
-                                <button onClick={() => handlePayBill(bill._id)}>Submit Payment</button>
-                            </td>
-                            {userType === 'manager' && <td><button onClick={() => handleMarkAsPaid(bill._id)}>Mark as Paid</button></td>}
-                        </tr>
-                    ))}
+                    {unpaidOverdueBills.map(renderBillRow)}
                 </tbody>
             </table>
 
@@ -148,26 +162,11 @@ const BillList = () => {
                         <th>Receiver</th>
                         <th>Biller</th>
                         <th>Payment Ref Number</th>
+                        {userType === 'manager' && <th>Action</th>}
                     </tr>
                 </thead>
                 <tbody>
-                    {upcomingUnpaidBills.map((bill) => (
-                        <tr key={bill._id}>
-                            <td>{bill.category}</td>
-                            <td>{bill.amount}</td>
-                            <td>{bill.dueDate}</td>
-                            <td>{bill.receiver}</td>
-                            <td>{bill.biller}</td>
-                            <td>
-                                <input
-                                    type="text"
-                                    value={paymentRefNumbers[bill._id] || ''}
-                                    onChange={(e) => handlePaymentRefNumberChange(bill._id, e.target.value)}
-                                />
-                                <button onClick={() => handlePayBill(bill._id)}>Submit Payment</button>
-                            </td>
-                        </tr>
-                    ))}
+                    {upcomingUnpaidBills.map(renderBillRow)}
                 </tbody>
             </table>
 
@@ -196,6 +195,8 @@ const BillList = () => {
                     ))}
                 </tbody>
             </table>
+
+
         </div>
     );
 };

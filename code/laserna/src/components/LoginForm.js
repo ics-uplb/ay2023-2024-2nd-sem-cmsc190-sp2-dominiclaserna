@@ -30,13 +30,9 @@ const LoginForm = () => {
                 toast.success('Login successful!'); // Display success notification
                 localStorage.setItem('loggedInUserEmail', formData.email);
                 
-                if (data.user && data.user.userType === 'user') {
-                    window.location.reload();
-                    navigate('/create-bill');
-                } else {
-                    window.location.reload();
-                    navigate('/user-details');
-                }
+                
+                navigate('/bills');
+                window.location.reload();
             } else {
                 toast.error('Incorrect email or password!'); // Display error notification
             }

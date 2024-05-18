@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify'; // Import toast
+import { useNavigate } from 'react-router-dom';
 import './BillForm.css';
 
 const BillForm = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         dueDate: '',
         amount: '',
@@ -28,6 +30,8 @@ const BillForm = () => {
             });
             if (response.ok) {
                 toast.success('Bill created successfully!'); // Display success notification
+                navigate('/bills');
+                
             } else {
                 toast.error('Failed to create bill!'); // Display error notification
             }
