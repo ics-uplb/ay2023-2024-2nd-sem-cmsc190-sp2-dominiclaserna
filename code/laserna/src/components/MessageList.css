@@ -1,36 +1,36 @@
-/* MessageList.css */
-
 .message-list-container {
   display: flex;
   flex-direction: column;
-  margin-top: 240px;
-  height: 100%; /* Ensure the container takes up the full height */
+  margin-top: 540px;
+  height: calc(100vh - 20px);  /* Adjust the height based on your layout */
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .message-list {
-  flex: 1; /* Allow the message list to grow and occupy remaining space */
-  overflow-y: auto; /* Add vertical scrollbar when content overflows */
+  flex: 1;
+  padding-top: 5px; /* Adjust padding-top value */
+  overflow-y: auto; /* Enable vertical scrolling */
+  height: 100%; /* Ensure the container takes up the full height */
 }
 
 .message-form-container {
   margin-top: 20px; /* Add margin to separate form from message list */
 }
 
-  .message {
-    border: 1px solid #ccc;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 5px;
-  }
-  
-  .message-left {
-    background-color: #64066d;
-    text-align: left;
-  }
-  
-  .message-right {
-    background-color: #64066d;
-    text-align: right;
-    align-self: flex-end;
-  }
-  
+.message {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+}
+
+.message-left {
+  background-color: #64066d;
+  text-align: left;
+}
+
+.message-right {
+  background-color: #64066d;
+  text-align: right;
+  align-self: flex-end;
+}

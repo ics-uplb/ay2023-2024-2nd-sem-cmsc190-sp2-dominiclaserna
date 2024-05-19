@@ -7,11 +7,20 @@ const BillList = () => {
     const [userType, setUserType] = useState('');
     const loggedInUserEmail = localStorage.getItem('loggedInUserEmail');
     const [paymentRefNumbers, setPaymentRefNumbers] = useState({});
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        fetchBills();
-        fetchUserType();
+        checkLoginStatus();
+        if (loggedInUserEmail) {
+            fetchBills();
+            fetchUserType();
+        }
     }, []);
+
+    const checkLoginStatus = () => {
+        const loggedIn = !!loggedInUserEmail;
+        setIsLoggedIn(loggedIn);
+    };
 
     const fetchBills = async () => {
         try {
@@ -62,7 +71,7 @@ const BillList = () => {
                 },
                 body: JSON.stringify({ paid: true })
             });
-    
+
             if (response.ok) {
                 console.log('Bill marked as paid successfully');
                 fetchBills();
@@ -85,7 +94,7 @@ const BillList = () => {
                 },
                 body: JSON.stringify({ paymentRefNumber: paymentRefNumber })
             });
-    
+
             if (response.ok) {
                 console.log('Bill payment updated successfully');
                 fetchBills();
@@ -127,9 +136,13 @@ const BillList = () => {
         </tr>
     );
 
+    if (!isLoggedIn) {
+        return <p>Please log in to view your bills.</p>;
+    }
+
     return (
         <div className="bill-list-container">
-                        {userType === 'manager' && (
+            {userType === 'manager' && (
                 <Link to="/create-bill" className="create-bill-button">
                     Create Bill
                 </Link>
@@ -195,8 +208,6 @@ const BillList = () => {
                     ))}
                 </tbody>
             </table>
-
-
         </div>
     );
 };

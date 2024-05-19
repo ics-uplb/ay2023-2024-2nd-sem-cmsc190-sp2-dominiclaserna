@@ -5,16 +5,16 @@ import AnnouncementsForm from './AnnouncementsForm'; // Import the Announcements
 const AnnouncementsList = () => {
     const [announcements, setAnnouncements] = useState([]);
     const [userType, setUserType] = useState('');
+    const [managerEmail, setManagerEmail] = useState('');
     const loggedInUserEmail = localStorage.getItem('loggedInUserEmail');
 
     useEffect(() => {
-        fetchAnnouncements();
         fetchUserType();
     }, []);
 
-    const fetchAnnouncements = async () => {
+    const fetchAnnouncements = async (userEmail, managerEmail) => {
         try {
-            const response = await fetch(`/announcements/tenant/${encodeURIComponent(loggedInUserEmail)}`);
+            const response = await fetch(`/announcements/tenant/${encodeURIComponent(userEmail)}/${encodeURIComponent(managerEmail)}`);
             if (response.ok) {
                 const data = await response.json();
                 setAnnouncements(data);
@@ -32,6 +32,8 @@ const AnnouncementsList = () => {
             if (response.ok) {
                 const userData = await response.json();
                 setUserType(userData.userType);
+                setManagerEmail(userData.managerEmail || ''); // Assuming managerEmail is available in user data
+                fetchAnnouncements(loggedInUserEmail, userData.managerEmail || '');
             } else {
                 console.error('Failed to fetch user type');
             }
@@ -52,7 +54,7 @@ const AnnouncementsList = () => {
             });
             if (response.ok) {
                 console.log('Announcement created successfully');
-                fetchAnnouncements(); // Refresh announcements after submission
+                fetchAnnouncements(loggedInUserEmail, managerEmail); // Refresh announcements after submission
             } else {
                 console.error('Failed to create announcement');
             }

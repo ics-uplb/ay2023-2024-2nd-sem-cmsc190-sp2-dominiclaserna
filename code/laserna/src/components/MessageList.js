@@ -8,6 +8,7 @@ const MessageList = () => {
 
   useEffect(() => {
     fetchMessages();
+    scrollToBottom(); // Scroll to the bottom of the message list container after content has loaded
   }, []);
 
   const fetchMessages = async () => {
@@ -42,6 +43,12 @@ const MessageList = () => {
     } catch (error) {
       console.error('Error sending message:', error);
     }
+  };
+
+  // Function to scroll to the bottom of the message list container
+  const scrollToBottom = () => {
+    const messageListContainer = document.querySelector('.message-list');
+    messageListContainer.scrollTop = messageListContainer.scrollHeight;
   };
 
   return (

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify'; // Import toast
+import { useNavigate } from 'react-router-dom';
 import './SignupForm.css';
 
 const SignupForm = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -28,6 +30,7 @@ const SignupForm = () => {
             });
             if (response.ok) {
                 toast.success('Signup successful!'); // Display success notification
+                navigate('/login');
             } else {
                 toast.error('Signup failed!'); // Display error notification
             }

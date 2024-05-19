@@ -15,7 +15,7 @@ exports.createBill = async (req, res) => {
         // Create a notification for the new bill
         const newNotification = await Notification.create({
             notificationOwner: receiver, // Assuming the receiver is the one who should see the notification
-            about: 'unpaid/overdue bill',
+            about: 'an unpaid/overdue bill',
             seen: false // Initially set as unseen
         });
         console.log('Notification created:', newNotification); // Log the newly created notification
@@ -27,6 +27,27 @@ exports.createBill = async (req, res) => {
     }
 };
 
+exports.createAnnouncement = async (req, res) => {
+  try {
+    const { title, message, manager, createdAt } = req.body;
+    const newAnnouncement = new Announcement({ title, message, manager, createdAt });
+    await newAnnouncement.save();
+
+    // Create a notification message for the receiver
+    const notificationMessage = new Message({
+      sender: manager,
+      receiver: manager, // Assuming the receiver is the manager; adjust as needed
+      subject: 'New Announcement Created',
+      body: `A new announcement titled "${title}" has been created.`
+    });
+    await notificationMessage.save();
+
+    res.status(201).json({ message: 'Announcement created successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
 
 // Controller function to get all bills
 exports.getAllBills = async (req, res) => {

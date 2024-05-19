@@ -47,7 +47,7 @@ const NotificationBell = ({ loggedInUserEmail }) => {
     try {
       // Display notification details as toast
       notifications.forEach(notification => {
-        toast.info(`You have an ${notification.about}`, {
+        toast.info(`You have ${notification.about}`, {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
