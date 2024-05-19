@@ -1,4 +1,5 @@
 // Import necessary modules
+require('dotenv').config();  // Load environment variables from .env file
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -10,7 +11,11 @@ const app = express();
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/laserna', { useNewUrlParser: true, useUnifiedTopology: true });
+const MONGODB_URI="mongodb+srv://luisdominiclaserna:bGKxeCZ2ghpi8BZ4@cluster0.tuqvzxf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('MongoDB connected successfully'))
+    .catch(err => console.error('MongoDB connection error:', err));
 
 // Define user routes
 const userController = require('./controllers/userController');
@@ -41,6 +46,7 @@ app.use('/messages', messageRoutes);
 
 const announcementRoutes = require('./routes/announcementRoutes'); // Import announcementRoutes
 app.use('/announcements', announcementRoutes); // Mount announcementRoutes at /announcements path
+
 // Define notification routes
 const notificationRoutes = require('./routes/notificationRoutes');
 app.use('/notifications', notificationRoutes); // Mount notificationRoutes at /notifications path
@@ -48,5 +54,6 @@ app.use('/notifications', notificationRoutes); // Mount notificationRoutes at /n
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
+    console.log(process.env)
     console.log(`Server is running on port ${PORT}`);
 });
