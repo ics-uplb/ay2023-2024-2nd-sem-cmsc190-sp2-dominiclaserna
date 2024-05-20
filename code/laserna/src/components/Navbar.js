@@ -1,17 +1,15 @@
-// Navbar.js
-
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify'; // Import toast
-import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
-import NotificationBell from './NotificationBell'; // Import the NotificationBell component
-import './Navbar.css'; // Import the Navbar CSS
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import NotificationBell from './NotificationBell';
+import './Navbar.css';
 
 const Navbar = ({ handleLogout }) => {
   const navigate = useNavigate();
 
   const notify = () => {
-    toast.success('You have been logged out.', { // Show success toast
+    toast.success('You have been logged out.', {
       position: 'top-right',
       autoClose: 3000,
       hideProgressBar: false,
@@ -45,18 +43,30 @@ const Navbar = ({ handleLogout }) => {
             <Link to="/messages" className="nav-link">Messages</Link>
           </li>
           <li>
-            <Link to="/announcements" className="nav-link">Announcements</Link> {/* Corrected route */}
+            <Link to="/announcements" className="nav-link">Announcements</Link>
           </li>
           <li>
-            <button className="nav-link logout-button" onClick={() => { handleLogout(); notify(); navigate('/login'); }}>Logout</button>
+            <Link to="/summary" className="nav-link">Bill Summary</Link> {/* Add the new nav link */}
           </li>
           <li>
-            <NotificationBell loggedInUserEmail={localStorage.getItem('loggedInUserEmail')} /> {/* Add the NotificationBell component */}
+            <button
+              className="nav-link logout-button"
+              onClick={() => {
+                handleLogout();
+                notify();
+                navigate('/login');
+              }}
+            >
+              Logout
+            </button>
+          </li>
+          <li>
+            <NotificationBell loggedInUserEmail={localStorage.getItem('loggedInUserEmail')} />
           </li>
         </ul>
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;
