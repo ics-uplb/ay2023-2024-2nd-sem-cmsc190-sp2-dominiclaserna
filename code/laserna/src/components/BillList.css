@@ -129,3 +129,10 @@
         width: 100%;
     }
 }
+.login-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    text-align: center;
+  }

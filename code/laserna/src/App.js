@@ -71,7 +71,6 @@ function SignupPage() {
 function LoginPage() {
   return (
     <>
-      <h1 style={{ color: '#fff' }}>Login Page</h1>
       <LoginForm />
     </>
   );
