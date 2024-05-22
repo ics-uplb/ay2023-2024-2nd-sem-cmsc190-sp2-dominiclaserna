@@ -2,6 +2,7 @@
 
 .announcements-list-container {
     padding: 1rem;
+    text-align: center;
   }
   
   .announcement {
@@ -15,6 +16,7 @@
   .announcement-title {
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
+    text-align:center;
   }
   
   .announcement-message {

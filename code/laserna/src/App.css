@@ -1,130 +1,28 @@
-
-
-.App {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-image: url('./bg.jpg'); /* Change the background image */
-  background-size: cover;
-  background-position: center;
-}
-
-
-
-.signup-container {
-  text-align: center;
-  background-color: white;
+.user-details-container {
   padding: 20px;
+  background-color: #5a1070;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow effect */
-}
-
-.signup-container h1 {
-  margin-bottom: 20px;
-  font-size: 24px;
-}
-
-.signup-container form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-/* App.css */
-
-.bg {
-  background-image: url('./bg.jpg');
-}
-
-.bg2 {
-  background-image: url('./bg2.jpg');
-}
-
-.bg3 {
-  background-image: url('./bg3.jpg');
-}
-
-
-.signup-container input,
-.signup-container button {
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.signup-container button {
-  background-color: #007bff; /* Set button background color */
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.signup-container button:hover {
-  background-color: #0056b3; /* Change button color on hover */
-}
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-
-  background-size: cover;
-  background-position: center;
-  height: 100vh; /* Ensure the background covers the whole viewport height */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.login-form {
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 20px;
-  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #fff;
 }
 
-.login-container {
-  width: 100%;
-  max-width: 400px;
+.user-details {
+  margin-top: 20px;
 }
 
-/* laserna/src/App.css */
-.nav-box {
-  background-color: #ffffcc; /* Light yellow background */
-  padding: 1.5rem; /* Increase padding for larger buttons */
-  border-radius: 10px;
-  margin-bottom: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust shadow effect */
+.detail-row {
+  margin-bottom: 10px;
 }
 
-
-.nav-btn:hover {
-  background-color: #333; /* Darken background on hover */
-}
-.nav {
-  background-color: #333;
-  padding: 10px;
-}
-
-.nav-links {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-.nav-links li {
+.detail-label {
+  font-weight: bold;
   margin-right: 10px;
 }
 
-.nav-btn {
-  background-color: #fff;
-  color: #333;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
+.detail-value {
+  font-weight: normal;
 }
 
-
+.error-message {
+  color: red;
+}

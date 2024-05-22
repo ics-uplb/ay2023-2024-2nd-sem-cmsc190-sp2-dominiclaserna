@@ -5,16 +5,16 @@ import AnnouncementsForm from './AnnouncementsForm'; // Import the Announcements
 const AnnouncementsList = () => {
     const [announcements, setAnnouncements] = useState([]);
     const [userType, setUserType] = useState('');
-    const [managerEmail, setManagerEmail] = useState('');
     const loggedInUserEmail = localStorage.getItem('loggedInUserEmail');
 
     useEffect(() => {
+        fetchAnnouncements();
         fetchUserType();
     }, []);
 
-    const fetchAnnouncements = async (userEmail, managerEmail) => {
+    const fetchAnnouncements = async () => {
         try {
-            const response = await fetch(`/announcements/tenant/${encodeURIComponent(userEmail)}/${encodeURIComponent(managerEmail)}`);
+            const response = await fetch('/announcements');
             if (response.ok) {
                 const data = await response.json();
                 setAnnouncements(data);
@@ -32,8 +32,6 @@ const AnnouncementsList = () => {
             if (response.ok) {
                 const userData = await response.json();
                 setUserType(userData.userType);
-                setManagerEmail(userData.managerEmail || ''); // Assuming managerEmail is available in user data
-                fetchAnnouncements(loggedInUserEmail, userData.managerEmail || '');
             } else {
                 console.error('Failed to fetch user type');
             }
@@ -54,7 +52,7 @@ const AnnouncementsList = () => {
             });
             if (response.ok) {
                 console.log('Announcement created successfully');
-                fetchAnnouncements(loggedInUserEmail, managerEmail); // Refresh announcements after submission
+                fetchAnnouncements(); // Refresh announcements after submission
             } else {
                 console.error('Failed to create announcement');
             }
@@ -65,14 +63,14 @@ const AnnouncementsList = () => {
 
     return (
         <div className="announcements-list-container">
-            <h2>Announcements</h2>
+            <h2 className="announcements-title">Announcements</h2>
             {userType === 'manager' && <AnnouncementsForm onAnnouncementSubmit={handleAnnouncementSubmit} />}
             {announcements.length === 0 ? (
                 <p>No announcements available</p>
             ) : (
-                <div>
+                <div className="announcements">
                     {announcements.map((announcement, index) => (
-                        <div key={index} className={`announcement ${announcement.manager === loggedInUserEmail ? 'announcement-right' : ''}`}>
+                        <div key={index} className="announcement">
                             <h3 className="announcement-title">{announcement.title}</h3>
                             <p className="announcement-message">{announcement.message}</p>
                             <p className="announcement-details">Posted by: {announcement.manager}</p>

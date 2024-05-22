@@ -19,7 +19,7 @@ const AnnouncementsForm = ({ onAnnouncementSubmit }) => {
     
     return (
         <div className="announcements-form-container">
-            <h2>Create Announcement</h2>
+            <h2 color='black'>Create Announcement</h2>
             <form onSubmit={handleSubmit} className="announcements-form">
                 <input type="text" name="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
                 <textarea name="message" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Message"></textarea>

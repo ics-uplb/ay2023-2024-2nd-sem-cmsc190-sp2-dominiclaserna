@@ -13,13 +13,9 @@ exports.createAnnouncement = async (req, res) => {
   }
 };
 
-// Get announcements for a tenant
-exports.getAnnouncementsForTenant = async (req, res) => {
+exports.getAllAnnouncements = async (req, res) => {
   try {
-    const { userEmail, managerEmail } = req.params;
-    const announcements = await Announcement.find({
-      $or: [{ manager: userEmail }, { manager: managerEmail }]
-    });
+    const announcements = await Announcement.find();
     res.status(200).json(announcements);
   } catch (error) {
     console.error(error);

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import './UserDetails.css'; // Import UserDetails stylesheet
 
 const UserDetails = () => {
@@ -34,22 +33,39 @@ const UserDetails = () => {
 
     return (
         <div className="user-details-container">
-            <h2>User Details</h2>
-            {loading && <p>Loading...</p>}
-            {error && <p className="error-message">{error}</p>}
-            {user && (
-                <div className="user-details">
-                    <p><strong>First Name:</strong> {user.firstName}</p>
-                    <p><strong>Last Name:</strong> {user.lastName}</p>
-                    <p><strong>Email:</strong> {user.email}</p>
-                    {user.userType === 'manager' && (
-                        <Link to="/create-bill">
-                            <button>Create Bill</button>
-                        </Link>
-                    )}
-                    {/* Display other user details here */}
-                </div>
-            )}
+            <div className="user-details-background">
+                {user && (
+                    <table className="user-details-table">
+                        <tbody>
+                            <tr>
+                                <td><strong>First Name:</strong></td>
+                                <td>{user.firstName}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Last Name:</strong></td>
+                                <td>{user.lastName}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Email:</strong></td>
+                                <td>{user.email}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>User Type:</strong></td>
+                                <td>{user.userType}</td>
+                            </tr>
+                            {user.userType === 'tenant' && (
+                                <tr>
+                                    <td><strong>Manager:</strong></td>
+                                    <td>{user.manager}</td>
+                                </tr>
+                            )}
+                            {/* Display other user details here */}
+                        </tbody>
+                    </table>
+                )}
+                {loading && <p>Loading...</p>}
+                {error && <p className="error-message">{error}</p>}
+            </div>
         </div>
     );
 };

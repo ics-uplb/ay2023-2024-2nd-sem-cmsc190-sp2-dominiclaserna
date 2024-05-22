@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NotificationBell from './NotificationBell';
@@ -25,28 +25,28 @@ const Navbar = ({ handleLogout }) => {
       <div className="nav-container">
         <ul className="nav-links">
           <li>
-            <Link to="/" className="nav-link">Home</Link>
+            <NavLink to="/" activeClassName="active" className="nav-link">Home</NavLink>
           </li>
           <li>
-            <Link to="/signup" className="nav-link">Sign Up</Link>
+            <NavLink to="/signup" activeClassName="active" className="nav-link">Sign Up</NavLink>
           </li>
           <li>
-            <Link to="/login" className="nav-link">Login</Link>
+            <NavLink to="/login" activeClassName="active" className="nav-link">Login</NavLink>
           </li>
           <li>
-            <Link to="/bills" className="nav-link">View Bills</Link>
+            <NavLink to="/bills" activeClassName="active" className="nav-link">View Bills</NavLink>
           </li>
           <li>
-            <Link to="/messages" className="nav-link">Messages</Link>
+            <NavLink to="/messages" activeClassName="active" className="nav-link">Messages</NavLink>
           </li>
           <li>
-            <Link to="/announcements" className="nav-link">Announcements</Link>
+            <NavLink to="/announcements" activeClassName="active" className="nav-link">Announcements</NavLink>
           </li>
           <li>
-            <Link to="/summary" className="nav-link">Bill Summary</Link> {/* Add the new nav link */}
+            <NavLink to="/summary" activeClassName="active" className="nav-link">Bill Summary</NavLink>
           </li>
           <li>
-            <Link to="/user-details" className="nav-link">User Details</Link>
+            <NavLink to="/user-details" activeClassName="active" className="nav-link">User Details</NavLink>
           </li>
           <li>
             <button

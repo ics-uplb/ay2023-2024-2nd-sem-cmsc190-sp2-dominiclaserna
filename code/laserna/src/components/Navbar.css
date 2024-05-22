@@ -1,38 +1,38 @@
-/* Navbar styling */
 .navbar {
-  background-color: #333; /* Set background color */
-  position: fixed; /* Fix the navbar position */
-  width: 100%; /* Set the width to full */
-  top: 0; /* Place the navbar at the top */
-  left: 0; /* Ensure it spans the entire width */
-  height: 60px; /* Set a consistent height */
-  display: flex; /* Use flexbox for alignment */
-  align-items: center; /* Center items vertically */
-  z-index: 1000; /* Ensure it appears above other elements */
+  background-color: #333;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
 }
 
-/* Navbar links styling */
 .nav-links {
-  list-style-type: none; /* Remove default list styles */
+  list-style-type: none;
   margin: 0;
   padding: 0;
-  display: flex; /* Display links in a row */
-  flex-grow: 1; /* Allow the links to grow */
-  justify-content: flex-start; /* Align links to the left */
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-start;
 }
 
 .nav-link {
-  color: #fff; /* Set link color */
-  text-decoration: none; /* Remove underline */
-  padding: 0 1rem; /* Add padding */
-  height: 60px; /* Set height to match navbar */
-  display: flex; /* Use flexbox for link alignment */
-  align-items: center; /* Center links vertically */
+  color: #fff;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
 }
 
-.nav-link:hover {
-  background-color: #555; /* Change background on hover */
+.nav-link:hover,
+.active {
+  background-color: #555;
 }
+
 .logout-button {
   background: none;
   border: none;
@@ -40,6 +40,7 @@
   cursor: pointer;
   padding: 1rem;
 }
+
 .notification-bell {
   background-color: transparent;
   border: none;
@@ -49,10 +50,10 @@
 }
 
 .bell-icon {
-  color: #fff; /* Set bell icon color */
-  font-size: 1.5rem; /* Set bell icon size */
-  position: relative; /* Position the bell icon */
-  top: 3px; /* Adjust vertical position */
+  color: #fff;
+  font-size: 1.5rem;
+  position: relative;
+  top: 3px;
 }
 
 .notification-badge {

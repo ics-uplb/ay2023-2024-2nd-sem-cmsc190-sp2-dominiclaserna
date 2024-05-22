@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import MessageForm from './MessageForm'; 
+import MessageForm from './MessageForm';
 import './MessageList.css';
 
 const MessageList = () => {
@@ -10,9 +10,14 @@ const MessageList = () => {
   useEffect(() => {
     if (isLoggedIn) {
       fetchMessages();
-      scrollToBottom(); // Scroll to the bottom of the message list container after content has loaded
     }
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (isLoggedIn && messages.length > 0) {
+      scrollToBottom();
+    }
+  }, [messages]);
 
   const fetchMessages = async () => {
     try {
@@ -48,7 +53,6 @@ const MessageList = () => {
     }
   };
 
-  // Function to scroll to the bottom of the message list container
   const scrollToBottom = () => {
     const messageListContainer = document.querySelector('.message-list');
     messageListContainer.scrollTop = messageListContainer.scrollHeight;
@@ -77,8 +81,8 @@ const MessageList = () => {
         </div>
       ) : (
         <div className="login-message">
-        <h3>Please log in to view your messages.</h3>
-      </div>
+          <h3>Please log in to view your messages.</h3>
+        </div>
       )}
     </div>
   );

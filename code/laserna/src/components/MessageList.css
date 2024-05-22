@@ -1,20 +1,21 @@
 .message-list-container {
   display: flex;
   flex-direction: column;
-  margin-top: 540px;
-  height: calc(100vh - 20px);  /* Adjust the height based on your layout */
+  height: calc(100vh - 100px);  /* Adjust the height based on your layout */
   overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.message-list-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px; /* Add padding to create space between messages and form */
 }
 
 .message-list {
   flex: 1;
-  padding-top: 5px; /* Adjust padding-top value */
   overflow-y: auto; /* Enable vertical scrolling */
-  height: 100%; /* Ensure the container takes up the full height */
-}
-
-.message-form-container {
-  margin-top: 20px; /* Add margin to separate form from message list */
+  padding: 10px;
 }
 
 .message {
@@ -26,14 +27,24 @@
 
 .message-left {
   background-color: #64066d;
+  color: white;
   text-align: left;
 }
 
 .message-right {
   background-color: #64066d;
+  color: white;
   text-align: right;
   align-self: flex-end;
 }
+
+.message-form-container {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+  margin-top: 10px; /* Adjust margin to bring the form closer to the messages */
+}
+
 .login-message {
   display: flex;
   justify-content: center;
