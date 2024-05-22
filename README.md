@@ -11,3 +11,4 @@ transactions and pay bills while managers will be able to keep
 track of those transactions. The system aims to enable contactless
 property management for all parties involved.
 
+Keywords:real estate management, web application, MERN Stack
