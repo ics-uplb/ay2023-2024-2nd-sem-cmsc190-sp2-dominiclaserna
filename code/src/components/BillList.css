@@ -1,0 +1,138 @@
+/* Navbar styles (assuming it's fixed and has a height of 60px) */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #333; /* Adjust as necessary */
+    z-index: 1000;
+}
+
+/* Container for all content below the navbar */
+.content-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px; /* Ensure it is below the navbar */
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Allow vertical scrolling if content overflows */
+    height: calc(100vh - 60px); /* Full height minus navbar */
+}
+
+/* Styles for the bill list container */
+.bill-list-container {
+    padding: 20px;
+    background-color: #64066d;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid #fff; /* Added white border */
+    flex: 1; /* Allow it to grow and fill available space */
+    overflow-x: auto; /* Handle overflow in x-direction */
+}
+
+/* Styles for the bill table */
+.bill-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #64066d; /* Changed table background color */
+}
+
+.bill-table th,
+.bill-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.bill-table th {
+    color: black;
+}
+
+.bill-table tr:nth-child(even) {
+    background-color: #64066d;
+}
+
+/* Styles for the payment input and button */
+.bill-table td input,
+.bill-table td button {
+    margin: 5px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.create-bill-button {
+    top: 70px; /* Adjust top position to be below navbar */
+    left: 140px; /* Adjust left position */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    border: 2px solid #007bff; /* Remove white border */
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}
+
+/* Adjust the position of the filter container */
+.filter-container {
+    position: fixed; /* Change position to fixed */
+    top: 320px; /* Adjust top position to be below the create bill button */
+    left: 240px; /* Adjust left position */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    border: 2px solid #007bff; /* Remove white border */
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.create-bill-button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Styles for the payment info */
+.payment-info {
+    position: fixed;
+    bottom: 20px; /* Adjust this value as needed */
+    left: 20px; /* Adjust this value as needed */
+    background-color: black;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Styles for the Mark as Paid button */
+.bill-table td button.mark-paid-button {
+    padding: 8px 12px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 14px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.bill-table td button.mark-paid-button:hover {
+    background-color: #218838;
+}
+
+/* Styles for the login message */
+.login-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 60px); /* Adjust height to be below the navbar */
+    text-align: center;
+}

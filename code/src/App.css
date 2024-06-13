@@ -1,0 +1,28 @@
+.user-details-container {
+  padding: 20px;
+  background-color: #5a1070;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #fff;
+}
+
+.user-details {
+  margin-top: 20px;
+}
+
+.detail-row {
+  margin-bottom: 10px;
+}
+
+.detail-label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.detail-value {
+  font-weight: normal;
+}
+
+.error-message {
+  color: red;
+}
