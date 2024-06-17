@@ -1,4 +1,4 @@
-# Streamlining Real Estate Management in the Philippines: Developing a Web-Based Solution for Day-to-Day Operations
+# Streamlining Real Estate Management in the Philippines: Development of a Web-Based Solution for Day-to-Day Operations
 Authors: Luis Dominic B. Laserna and Mylah Rystie U. Anacleto
 
  In this paper, a web-based application for managing
