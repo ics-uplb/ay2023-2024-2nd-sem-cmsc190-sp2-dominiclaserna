@@ -13,4 +13,6 @@ application to cater to the needs of both user types. The
 application obtained a System Usability Scale (SUS) score of
 79.5 showing that users found it effective and usable.
 
+MRUANACLETO Verified 14 August 2024
+
 Keywords:real estate management, web application, MERN Stack
